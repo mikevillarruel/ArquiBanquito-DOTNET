@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PROYECTO_DOTNET_SOAP_CLIENTE_PASPUEL_QUISTANCHALA_VILLARRUEL.WSCoreBancario.Movimiento>
+
+@{
+    ViewBag.Title = "DetalleMovimientos";
+}
+
+<div style="background-color: white; border-radius: 20px; padding: 10px 30px 10px 30px; margin-top: 10px;">
+
+    <!--
+        <h2>Detalle de Movimientos</h2>
+        <h3>Cuenta: @ViewBag.Cuenta</h3>
+        <br />
+    -->
+    <table class="table">
+        <tr>
+            <th>
+                FECHA
+            </th>
+            <th>
+                TIPO
+            </th>
+            <th>
+                IMPORTE
+            </th>
+            <th>
+                DESTINO
+            </th>
+            <th>
+                SALDO
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_movimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipo_movimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.importe_movimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.destino_movimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.saldo_movimiento)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

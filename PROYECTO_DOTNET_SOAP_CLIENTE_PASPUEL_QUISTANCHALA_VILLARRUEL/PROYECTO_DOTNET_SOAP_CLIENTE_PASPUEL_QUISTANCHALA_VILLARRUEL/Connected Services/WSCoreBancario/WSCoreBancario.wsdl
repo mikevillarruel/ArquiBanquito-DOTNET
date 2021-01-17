@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="verificarCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cedula" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cuenta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="verificarClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="verificarClienteResult" type="tns:Cliente" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Cliente">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_cliente" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombres_cliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="apellidos_cliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedula_cliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="direccion_cliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="telefono_cliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="correo_cliente" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="inicioSesion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuarioNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contrasena" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="inicioSesionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="inicioSesionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="posicionConsolidada">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cedula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="posicionConsolidadaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="posicionConsolidadaResult" type="tns:ArrayOfCuenta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCuenta">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Cuenta" nillable="true" type="tns:Cuenta" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Cuenta">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_cuenta" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_cliente" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="nro_cuenta" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo_cuenta" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="saldo_cuenta" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="detalleMovimientos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cuenta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="detalleMovimientosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="detalleMovimientosResult" type="tns:ArrayOfMovimiento" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMovimiento">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Movimiento" nillable="true" type="tns:Movimiento" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Movimiento">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_movimiento" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_cuenta" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="fecha_movimiento" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="tipo_movimiento" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="importe_movimiento" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="destino_movimiento" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="saldo_movimiento" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="transferencias">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cuentaOrigen" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="importe" type="s:double" />
+            <s:element minOccurs="0" maxOccurs="1" name="cuentaDestino" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="transferenciasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="transferenciasResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="registrarCuentaBancaria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idCliente" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipoCuenta" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="saldoInicial" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="registrarCuentaBancariaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="registrarCuentaBancariaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombreUsuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="obtenerUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="obtenerUsuarioResult" type="tns:Usuario" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Usuario">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="id_usuario" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="id_cliente" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="cedula_cliente" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="nombre_usuario" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="password_usuario" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="cambio_usuario" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="actualizarContrasena">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombreUsuario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="contrasenia" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="actualizarContrasenaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="actualizarContrasenaResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="verificarClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:verificarCliente" />
+  </wsdl:message>
+  <wsdl:message name="verificarClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:verificarClienteResponse" />
+  </wsdl:message>
+  <wsdl:message name="inicioSesionSoapIn">
+    <wsdl:part name="parameters" element="tns:inicioSesion" />
+  </wsdl:message>
+  <wsdl:message name="inicioSesionSoapOut">
+    <wsdl:part name="parameters" element="tns:inicioSesionResponse" />
+  </wsdl:message>
+  <wsdl:message name="posicionConsolidadaSoapIn">
+    <wsdl:part name="parameters" element="tns:posicionConsolidada" />
+  </wsdl:message>
+  <wsdl:message name="posicionConsolidadaSoapOut">
+    <wsdl:part name="parameters" element="tns:posicionConsolidadaResponse" />
+  </wsdl:message>
+  <wsdl:message name="detalleMovimientosSoapIn">
+    <wsdl:part name="parameters" element="tns:detalleMovimientos" />
+  </wsdl:message>
+  <wsdl:message name="detalleMovimientosSoapOut">
+    <wsdl:part name="parameters" element="tns:detalleMovimientosResponse" />
+  </wsdl:message>
+  <wsdl:message name="transferenciasSoapIn">
+    <wsdl:part name="parameters" element="tns:transferencias" />
+  </wsdl:message>
+  <wsdl:message name="transferenciasSoapOut">
+    <wsdl:part name="parameters" element="tns:transferenciasResponse" />
+  </wsdl:message>
+  <wsdl:message name="registrarCuentaBancariaSoapIn">
+    <wsdl:part name="parameters" element="tns:registrarCuentaBancaria" />
+  </wsdl:message>
+  <wsdl:message name="registrarCuentaBancariaSoapOut">
+    <wsdl:part name="parameters" element="tns:registrarCuentaBancariaResponse" />
+  </wsdl:message>
+  <wsdl:message name="obtenerUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:obtenerUsuario" />
+  </wsdl:message>
+  <wsdl:message name="obtenerUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:obtenerUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="actualizarContrasenaSoapIn">
+    <wsdl:part name="parameters" element="tns:actualizarContrasena" />
+  </wsdl:message>
+  <wsdl:message name="actualizarContrasenaSoapOut">
+    <wsdl:part name="parameters" element="tns:actualizarContrasenaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSCoreBancarioSoap">
+    <wsdl:operation name="verificarCliente">
+      <wsdl:input message="tns:verificarClienteSoapIn" />
+      <wsdl:output message="tns:verificarClienteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="inicioSesion">
+      <wsdl:input message="tns:inicioSesionSoapIn" />
+      <wsdl:output message="tns:inicioSesionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="posicionConsolidada">
+      <wsdl:input message="tns:posicionConsolidadaSoapIn" />
+      <wsdl:output message="tns:posicionConsolidadaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="detalleMovimientos">
+      <wsdl:input message="tns:detalleMovimientosSoapIn" />
+      <wsdl:output message="tns:detalleMovimientosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="transferencias">
+      <wsdl:input message="tns:transferenciasSoapIn" />
+      <wsdl:output message="tns:transferenciasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="registrarCuentaBancaria">
+      <wsdl:input message="tns:registrarCuentaBancariaSoapIn" />
+      <wsdl:output message="tns:registrarCuentaBancariaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="obtenerUsuario">
+      <wsdl:input message="tns:obtenerUsuarioSoapIn" />
+      <wsdl:output message="tns:obtenerUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="actualizarContrasena">
+      <wsdl:input message="tns:actualizarContrasenaSoapIn" />
+      <wsdl:output message="tns:actualizarContrasenaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSCoreBancarioSoap" type="tns:WSCoreBancarioSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="verificarCliente">
+      <soap:operation soapAction="http://tempuri.org/verificarCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inicioSesion">
+      <soap:operation soapAction="http://tempuri.org/inicioSesion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="posicionConsolidada">
+      <soap:operation soapAction="http://tempuri.org/posicionConsolidada" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="detalleMovimientos">
+      <soap:operation soapAction="http://tempuri.org/detalleMovimientos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferencias">
+      <soap:operation soapAction="http://tempuri.org/transferencias" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarCuentaBancaria">
+      <soap:operation soapAction="http://tempuri.org/registrarCuentaBancaria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerUsuario">
+      <soap:operation soapAction="http://tempuri.org/obtenerUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarContrasena">
+      <soap:operation soapAction="http://tempuri.org/actualizarContrasena" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSCoreBancarioSoap12" type="tns:WSCoreBancarioSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="verificarCliente">
+      <soap12:operation soapAction="http://tempuri.org/verificarCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="inicioSesion">
+      <soap12:operation soapAction="http://tempuri.org/inicioSesion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="posicionConsolidada">
+      <soap12:operation soapAction="http://tempuri.org/posicionConsolidada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="detalleMovimientos">
+      <soap12:operation soapAction="http://tempuri.org/detalleMovimientos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferencias">
+      <soap12:operation soapAction="http://tempuri.org/transferencias" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarCuentaBancaria">
+      <soap12:operation soapAction="http://tempuri.org/registrarCuentaBancaria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerUsuario">
+      <soap12:operation soapAction="http://tempuri.org/obtenerUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarContrasena">
+      <soap12:operation soapAction="http://tempuri.org/actualizarContrasena" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSCoreBancario">
+    <wsdl:port name="WSCoreBancarioSoap" binding="tns:WSCoreBancarioSoap">
+      <soap:address location="https://localhost:44390/WS/WSCoreBancario.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSCoreBancarioSoap12" binding="tns:WSCoreBancarioSoap12">
+      <soap12:address location="https://localhost:44390/WS/WSCoreBancario.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

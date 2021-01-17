@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="corebancarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRES_CLIENTE" Type="char" MaxLength="40" />
+          <Property Name="APELLIDOS_CLIENTE" Type="char" MaxLength="40" />
+          <Property Name="CEDULA_CLIENTE" Type="char" MaxLength="10" />
+          <Property Name="DIRECCION_CLIENTE" Type="char" MaxLength="120" />
+          <Property Name="TELEFONO_CLIENTE" Type="char" MaxLength="10" />
+          <Property Name="CORREO_CLIENTE" Type="char" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="ID_CUENTA" />
+          </Key>
+          <Property Name="ID_CUENTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="NRO_CUENTA" Type="char" MaxLength="8" />
+          <Property Name="TIPO_CUENTA" Type="char" MaxLength="10" />
+          <Property Name="SALDO_CUENTA" Type="decimal" Precision="12" Scale="2" />
+        </EntityType>
+        <EntityType Name="MOVIMIENTO">
+          <Key>
+            <PropertyRef Name="ID_MOVIMIENTO" />
+          </Key>
+          <Property Name="ID_MOVIMIENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CUENTA" Type="int" Nullable="false" />
+          <Property Name="FECHA_MOVIMIENTO" Type="datetime" />
+          <Property Name="TIPO_MOVIMIENTO" Type="char" MaxLength="10" />
+          <Property Name="IMPORTE_MOVIMIENTO" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="DESTINO_MOVIMIENTO" Type="char" MaxLength="8" />
+          <Property Name="SALDO_MOVIMIENTO" Type="decimal" Precision="12" Scale="2" />
+        </EntityType>
+        <Association Name="FK_CUENTA_CLI_CUEN_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MOVIMIEN_CUEN_MOV_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="1" />
+          <End Role="MOVIMIENTO" Type="Self.MOVIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="ID_CUENTA" />
+            </Principal>
+            <Dependent Role="MOVIMIENTO">
+              <PropertyRef Name="ID_CUENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="corebancarioModelStoreContainer">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIMIENTO" EntityType="Self.MOVIMIENTO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CUENTA_CLI_CUEN_CLIENTE" Association="Self.FK_CUENTA_CLI_CUEN_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MOVIMIEN_CUEN_MOV_CUENTA" Association="Self.FK_MOVIMIEN_CUEN_MOV_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="MOVIMIENTO" EntitySet="MOVIMIENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="corebancarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRES_CLIENTE" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+          <Property Name="APELLIDOS_CLIENTE" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+          <Property Name="CEDULA_CLIENTE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="DIRECCION_CLIENTE" Type="String" MaxLength="120" FixedLength="true" Unicode="false" />
+          <Property Name="TELEFONO_CLIENTE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="CORREO_CLIENTE" Type="String" MaxLength="128" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_CLI_CUEN_CLIENTE" FromRole="CLIENTE" ToRole="CUENTA" />
+        </EntityType>
+        <EntityType Name="CUENTA">
+          <Key>
+            <PropertyRef Name="ID_CUENTA" />
+          </Key>
+          <Property Name="ID_CUENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="NRO_CUENTA" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="TIPO_CUENTA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="SALDO_CUENTA" Type="Decimal" Precision="12" Scale="2" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CUENTA_CLI_CUEN_CLIENTE" FromRole="CUENTA" ToRole="CLIENTE" />
+          <NavigationProperty Name="MOVIMIENTO" Relationship="Self.FK_MOVIMIEN_CUEN_MOV_CUENTA" FromRole="CUENTA" ToRole="MOVIMIENTO" />
+        </EntityType>
+        <EntityType Name="MOVIMIENTO">
+          <Key>
+            <PropertyRef Name="ID_MOVIMIENTO" />
+          </Key>
+          <Property Name="ID_MOVIMIENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CUENTA" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_MOVIMIENTO" Type="DateTime" Precision="3" />
+          <Property Name="TIPO_MOVIMIENTO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="IMPORTE_MOVIMIENTO" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="DESTINO_MOVIMIENTO" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="SALDO_MOVIMIENTO" Type="Decimal" Precision="12" Scale="2" />
+          <NavigationProperty Name="CUENTA" Relationship="Self.FK_MOVIMIEN_CUEN_MOV_CUENTA" FromRole="MOVIMIENTO" ToRole="CUENTA" />
+        </EntityType>
+        <Association Name="FK_CUENTA_CLI_CUEN_CLIENTE">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="CUENTA">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MOVIMIEN_CUEN_MOV_CUENTA">
+          <End Role="CUENTA" Type="Self.CUENTA" Multiplicity="1" />
+          <End Role="MOVIMIENTO" Type="Self.MOVIMIENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUENTA">
+              <PropertyRef Name="ID_CUENTA" />
+            </Principal>
+            <Dependent Role="MOVIMIENTO">
+              <PropertyRef Name="ID_CUENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="corebancarioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="CUENTA" EntityType="Self.CUENTA" />
+          <EntitySet Name="MOVIMIENTO" EntityType="Self.MOVIMIENTO" />
+          <AssociationSet Name="FK_CUENTA_CLI_CUEN_CLIENTE" Association="Self.FK_CUENTA_CLI_CUEN_CLIENTE">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="CUENTA" EntitySet="CUENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MOVIMIEN_CUEN_MOV_CUENTA" Association="Self.FK_MOVIMIEN_CUEN_MOV_CUENTA">
+            <End Role="CUENTA" EntitySet="CUENTA" />
+            <End Role="MOVIMIENTO" EntitySet="MOVIMIENTO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="corebancarioModelStoreContainer" CdmEntityContainer="corebancarioEntities">
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="corebancarioModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="NOMBRES_CLIENTE" ColumnName="NOMBRES_CLIENTE" />
+                <ScalarProperty Name="APELLIDOS_CLIENTE" ColumnName="APELLIDOS_CLIENTE" />
+                <ScalarProperty Name="CEDULA_CLIENTE" ColumnName="CEDULA_CLIENTE" />
+                <ScalarProperty Name="DIRECCION_CLIENTE" ColumnName="DIRECCION_CLIENTE" />
+                <ScalarProperty Name="TELEFONO_CLIENTE" ColumnName="TELEFONO_CLIENTE" />
+                <ScalarProperty Name="CORREO_CLIENTE" ColumnName="CORREO_CLIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUENTA">
+            <EntityTypeMapping TypeName="corebancarioModel.CUENTA">
+              <MappingFragment StoreEntitySet="CUENTA">
+                <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="NRO_CUENTA" ColumnName="NRO_CUENTA" />
+                <ScalarProperty Name="TIPO_CUENTA" ColumnName="TIPO_CUENTA" />
+                <ScalarProperty Name="SALDO_CUENTA" ColumnName="SALDO_CUENTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIMIENTO">
+            <EntityTypeMapping TypeName="corebancarioModel.MOVIMIENTO">
+              <MappingFragment StoreEntitySet="MOVIMIENTO">
+                <ScalarProperty Name="ID_MOVIMIENTO" ColumnName="ID_MOVIMIENTO" />
+                <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+                <ScalarProperty Name="FECHA_MOVIMIENTO" ColumnName="FECHA_MOVIMIENTO" />
+                <ScalarProperty Name="TIPO_MOVIMIENTO" ColumnName="TIPO_MOVIMIENTO" />
+                <ScalarProperty Name="IMPORTE_MOVIMIENTO" ColumnName="IMPORTE_MOVIMIENTO" />
+                <ScalarProperty Name="DESTINO_MOVIMIENTO" ColumnName="DESTINO_MOVIMIENTO" />
+                <ScalarProperty Name="SALDO_MOVIMIENTO" ColumnName="SALDO_MOVIMIENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
