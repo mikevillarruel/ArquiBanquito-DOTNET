@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "CrearCuenta";
+}
+
+<div style="background-color: white; border-radius: 20px; padding: 10px 30px 10px 30px; margin-top: 10px;">
+    <center>
+        <h2>Crear Cuenta</h2>
+        <br />
+        <form action="@Url.Content("~/Home/CrearCuenta")" method="post">
+
+            @{
+                if (ViewBag.Message != null)
+                {
+                    if (@ViewBag.Message)
+                    {
+                        <h4 style="width: 300px;" class="alert-success">Cuenta creada exitosamente</h4>
+                    }
+                    else
+                    {
+                        <h4 style="width: 300px;" class="alert-danger">Revise sus datos</h4>
+                    }
+                }
+
+            }
+
+            <div class="form-group">
+                <label>Tipo Cuenta *</label>
+                <br />
+                <select style="width:200px;" name="tipoCuenta" required>
+                    <option value="Ahorros">Ahorros</option>
+                    <option value="Corriente">Corriente</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Monto Inicial *</label>
+                <br />
+                <input min="1" type="number" name="montoInicial" required/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-success" />
+            </div>
+
+        </form>
+        <br />
+    </center>
+</div>
+
+
+

@@ -1,0 +1,6 @@
+@using PROYECTO_DOTNET_REST_PASPUEL_QUISTANCHALA_VILLARRUEL.Areas.HelpPage.ModelDescriptions
+@model CollectionModelDescription
+@if (Model.ElementDescription is ComplexTypeModelDescription)
+{
+    @Html.DisplayFor(m => m.ElementDescription)
+}
