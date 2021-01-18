@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 
 namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
@@ -41,13 +43,10 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
                     //GENERAR CONTRASEÑA
                     string contrasenia = GenerarContrasenia();
 
-                    //ENVIAR CORREO
-
-
                     //ENCRIPTAR CONTRASEÑA
                     usuario.PASSWORD_USUARIO = Encriptar(contrasenia);
 
-                    string nombreUsuario = cliente.NOMBRES_CLIENTE[0] + cliente.APELLIDOS_CLIENTE;
+                    string nombreUsuario = (cliente.NOMBRES_CLIENTE[0] + cliente.APELLIDOS_CLIENTE).ToLower();
 
 
                     //VERIFICA QUE EL CLIENTE NO TENGA USUARIO
@@ -70,6 +69,9 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
                         dbBanca.USUARIO.Add(usuario);
                         dbBanca.SaveChanges();
 
+                        //ENVIAR CORREO
+                        EnviarCorreo(usuario.NOMBRE_USUARIO, contrasenia);
+
                     }
                     else
                     {
@@ -84,6 +86,42 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
                 return rec;
             }
 
+        }
+
+        public void EnviarCorreo(String usuario, String contrasenia)
+        {
+            try
+            {
+                var fromAddress = new MailAddress("plantasmedstore@gmail.com", "BanQuito");
+                var toAddress = new MailAddress("alejovillarruel@gmail.com");
+                string fromPassword = "afrqurvhpukoxdsk";
+                string subject = "Contraseña - Sistemas Bancario";
+                string body = "Estimado usuario,\n" +
+                    "Envío sus credenciales para el ingreso a la banca electrónica.\n" +
+                    "Usuario: " + usuario + "\n" +
+                    "Contraseña: " + contrasenia;
+
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public String GenerarContrasenia()
@@ -325,6 +363,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
                                where u.NOMBRE_USUARIO == nombreUsuario
                                select u).FirstOrDefault();
                 usuario.PASSWORD_USUARIO = Encriptar(contrasenia);
+                usuario.CAMBIO_USUARIO = 1;
                 dbBanca.SaveChanges();
                 return true;
             }

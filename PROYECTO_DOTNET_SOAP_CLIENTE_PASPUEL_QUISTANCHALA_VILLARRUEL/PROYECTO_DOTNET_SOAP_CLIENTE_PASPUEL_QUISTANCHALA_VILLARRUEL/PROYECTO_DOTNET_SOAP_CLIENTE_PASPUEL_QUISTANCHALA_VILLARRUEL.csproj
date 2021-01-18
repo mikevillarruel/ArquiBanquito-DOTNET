@@ -184,6 +184,7 @@
     <Content Include="Views\Home\Transferencias.cshtml" />
     <Content Include="Views\Home\CrearCuenta.cshtml" />
     <Content Include="Views\Acceso\RegistrarUsuario.cshtml" />
+    <Content Include="Views\Acceso\ActualizarContrasenia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

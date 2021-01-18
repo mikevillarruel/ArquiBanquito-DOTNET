@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "ActualizarContrasenia";
     Layout = null;
 }
 
@@ -32,7 +32,7 @@
         }
 
         label, input {
-            width: 300px;
+            width: 20vw;
         }
 
         aside {
@@ -67,17 +67,17 @@
         <aside>
             <center>
                 <h4 class="alert-danger">@ViewBag.Message</h4>
-                <form action="@Url.Content("~/Acceso/RegistrarUsuario")" method="post">
+                <form action="@Url.Content("~/Acceso/ActualizarContrasenia")" method="post">
 
                     <div class="form-group">
-                        <label>Cédula *</label>
+                        <label>Nueva Contraseña *</label>
                         <br />
-                        <input type="text" name="cedula" autocomplete="off"/>
+                        <input type="password" name="nuevaContrasenia" autocomplete="off" />
                     </div>
                     <div class="form-group">
-                        <label>Cuenta *</label>
+                        <label>Repita la contraseña *</label>
                         <br />
-                        <input type="password" name="nroCuenta" autocomplete="off"/>
+                        <input type="password" name="nuevaContraseniaR" autocomplete="off" />
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Registrar" class="btn btn-success" />

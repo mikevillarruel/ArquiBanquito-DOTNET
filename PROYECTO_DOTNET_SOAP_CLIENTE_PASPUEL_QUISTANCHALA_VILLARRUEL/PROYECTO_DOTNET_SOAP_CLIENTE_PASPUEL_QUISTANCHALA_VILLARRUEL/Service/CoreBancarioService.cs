@@ -44,7 +44,7 @@ namespace PROYECTO_DOTNET_SOAP_CLIENTE_PASPUEL_QUISTANCHALA_VILLARRUEL.Service
             return service.obtenerUsuario(nombreUsuario);
         }
 
-        public Boolean actualizarContrasena(String nombreUsuario, String contrasenia)
+        public Boolean actualizarContrasenia(String nombreUsuario, String contrasenia)
         {
             return service.actualizarContrasena(nombreUsuario, contrasenia);
         }
