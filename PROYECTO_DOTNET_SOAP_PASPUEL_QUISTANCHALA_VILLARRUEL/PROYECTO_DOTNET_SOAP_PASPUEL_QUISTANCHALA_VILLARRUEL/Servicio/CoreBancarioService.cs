@@ -15,7 +15,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
             Cliente rec = new Cliente();
             try
             {
-                DB.corebancarioEntities db = new DB.corebancarioEntities();
+                DB.corebancario db = new DB.corebancario();
 
                 var cliente = (from c in db.CUENTA
                                join cl in db.CLIENTE on c.ID_CLIENTE equals cl.ID_CLIENTE
@@ -34,7 +34,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
 
 
                     DB.USUARIO usuario = new DB.USUARIO();
-                    DB.bancaelectronicaEntities dbBanca = new DB.bancaelectronicaEntities();
+                    DB.bancaelectronica dbBanca = new DB.bancaelectronica();
 
                     usuario.CEDULA_CLIENTE = cliente.CEDULA_CLIENTE;
                     usuario.ID_CLIENTE = cliente.ID_CLIENTE;
@@ -93,7 +93,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
             try
             {
                 var fromAddress = new MailAddress("plantasmedstore@gmail.com", "BanQuito");
-                var toAddress = new MailAddress("alejovillarruel@gmail.com");
+                var toAddress = new MailAddress("karly.btr.97@hotmail.com");
                 string fromPassword = "afrqurvhpukoxdsk";
                 string subject = "Contraseña - Sistemas Bancario";
                 string body = "Estimado usuario,\n" +
@@ -167,7 +167,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
         public Boolean inicioSesion(String usuarioNombre, String contrasena)
         {
 
-            DB.bancaelectronicaEntities db = new DB.bancaelectronicaEntities();
+            DB.bancaelectronica db = new DB.bancaelectronica();
             //contrasena = Encriptar(contrasena); // EN CLIENTE
             var sql = (from u in db.USUARIO
                        where u.NOMBRE_USUARIO == usuarioNombre && u.PASSWORD_USUARIO == contrasena
@@ -179,7 +179,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
         public List<Cuenta> posicionConsolidada(String cedula)
         {
             List<Cuenta> lista = new List<Cuenta>();
-            DB.corebancarioEntities db = new DB.corebancarioEntities();
+            DB.corebancario db = new DB.corebancario();
             var sqlLista = (from c in db.CUENTA
                             where c.ID_CLIENTE == (from cl in db.CLIENTE
                                                    where cl.CEDULA_CLIENTE == cedula
@@ -211,7 +211,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
         public List<Movimiento> detalleMovimientos(String cuenta)
         {
             List<Movimiento> lista = new List<Movimiento>();
-            DB.corebancarioEntities db = new DB.corebancarioEntities();
+            DB.corebancario db = new DB.corebancario();
 
             var sqlLista = (from m in db.MOVIMIENTO
                             where m.CUENTA.NRO_CUENTA == cuenta
@@ -244,7 +244,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
         {
             try
             {
-                DB.corebancarioEntities db = new DB.corebancarioEntities();
+                DB.corebancario db = new DB.corebancario();
                 DB.MOVIMIENTO m = new DB.MOVIMIENTO();
 
                 //VERIFICAR SALDO
@@ -304,7 +304,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
 
             try
             {
-                DB.corebancarioEntities db = new DB.corebancarioEntities();
+                DB.corebancario db = new DB.corebancario();
                 DB.CUENTA cuenta = new DB.CUENTA();
                 cuenta.ID_CLIENTE = idCliente;
                 cuenta.TIPO_CUENTA = tipoCuenta;
@@ -333,7 +333,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
 
         public Usuario obtenerUsuario(string nombreUsuario) {
 
-            DB.bancaelectronicaEntities dbBanca = new DB.bancaelectronicaEntities();
+            DB.bancaelectronica dbBanca = new DB.bancaelectronica();
             var usuario = (from u in dbBanca.USUARIO
                            where u.NOMBRE_USUARIO == nombreUsuario
                            select u).FirstOrDefault();
@@ -358,7 +358,7 @@ namespace PROYECTO_DOTNET_SOAP_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
 
             try
             {
-                DB.bancaelectronicaEntities dbBanca = new DB.bancaelectronicaEntities();
+                DB.bancaelectronica dbBanca = new DB.bancaelectronica();
                 var usuario = (from u in dbBanca.USUARIO
                                where u.NOMBRE_USUARIO == nombreUsuario
                                select u).FirstOrDefault();

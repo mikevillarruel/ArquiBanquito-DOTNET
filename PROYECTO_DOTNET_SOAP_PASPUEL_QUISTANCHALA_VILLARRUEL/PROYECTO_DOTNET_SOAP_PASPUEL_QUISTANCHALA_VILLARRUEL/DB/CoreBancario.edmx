@@ -10,12 +10,12 @@
             <PropertyRef Name="ID_CLIENTE" />
           </Key>
           <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NOMBRES_CLIENTE" Type="char" MaxLength="40" />
-          <Property Name="APELLIDOS_CLIENTE" Type="char" MaxLength="40" />
+          <Property Name="NOMBRES_CLIENTE" Type="varchar" MaxLength="40" />
+          <Property Name="APELLIDOS_CLIENTE" Type="varchar" MaxLength="40" />
           <Property Name="CEDULA_CLIENTE" Type="char" MaxLength="10" />
-          <Property Name="DIRECCION_CLIENTE" Type="char" MaxLength="120" />
-          <Property Name="TELEFONO_CLIENTE" Type="char" MaxLength="10" />
-          <Property Name="CORREO_CLIENTE" Type="char" MaxLength="128" />
+          <Property Name="DIRECCION_CLIENTE" Type="varchar" MaxLength="120" />
+          <Property Name="TELEFONO_CLIENTE" Type="varchar" MaxLength="10" />
+          <Property Name="CORREO_CLIENTE" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CUENTA">
           <Key>
@@ -23,8 +23,8 @@
           </Key>
           <Property Name="ID_CUENTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_CLIENTE" Type="int" Nullable="false" />
-          <Property Name="NRO_CUENTA" Type="char" MaxLength="8" />
-          <Property Name="TIPO_CUENTA" Type="char" MaxLength="10" />
+          <Property Name="NRO_CUENTA" Type="varchar" MaxLength="8" />
+          <Property Name="TIPO_CUENTA" Type="varchar" MaxLength="10" />
           <Property Name="SALDO_CUENTA" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <EntityType Name="MOVIMIENTO">
@@ -34,9 +34,9 @@
           <Property Name="ID_MOVIMIENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_CUENTA" Type="int" Nullable="false" />
           <Property Name="FECHA_MOVIMIENTO" Type="datetime" />
-          <Property Name="TIPO_MOVIMIENTO" Type="char" MaxLength="10" />
+          <Property Name="TIPO_MOVIMIENTO" Type="varchar" MaxLength="10" />
           <Property Name="IMPORTE_MOVIMIENTO" Type="decimal" Precision="12" Scale="2" />
-          <Property Name="DESTINO_MOVIMIENTO" Type="char" MaxLength="8" />
+          <Property Name="DESTINO_MOVIMIENTO" Type="varchar" MaxLength="8" />
           <Property Name="SALDO_MOVIMIENTO" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <Association Name="FK_CUENTA_CLI_CUEN_CLIENTE">
@@ -86,12 +86,12 @@
             <PropertyRef Name="ID_CLIENTE" />
           </Key>
           <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NOMBRES_CLIENTE" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
-          <Property Name="APELLIDOS_CLIENTE" Type="String" MaxLength="40" FixedLength="true" Unicode="false" />
+          <Property Name="NOMBRES_CLIENTE" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDOS_CLIENTE" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="CEDULA_CLIENTE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="DIRECCION_CLIENTE" Type="String" MaxLength="120" FixedLength="true" Unicode="false" />
-          <Property Name="TELEFONO_CLIENTE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="CORREO_CLIENTE" Type="String" MaxLength="128" FixedLength="true" Unicode="false" />
+          <Property Name="DIRECCION_CLIENTE" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO_CLIENTE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO_CLIENTE" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CUENTA" Relationship="Self.FK_CUENTA_CLI_CUEN_CLIENTE" FromRole="CLIENTE" ToRole="CUENTA" />
         </EntityType>
         <EntityType Name="CUENTA">
@@ -100,8 +100,8 @@
           </Key>
           <Property Name="ID_CUENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" />
-          <Property Name="NRO_CUENTA" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Name="TIPO_CUENTA" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="NRO_CUENTA" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO_CUENTA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="SALDO_CUENTA" Type="Decimal" Precision="12" Scale="2" />
           <NavigationProperty Name="CLIENTE" Relationship="Self.FK_CUENTA_CLI_CUEN_CLIENTE" FromRole="CUENTA" ToRole="CLIENTE" />
           <NavigationProperty Name="MOVIMIENTO" Relationship="Self.FK_MOVIMIEN_CUEN_MOV_CUENTA" FromRole="CUENTA" ToRole="MOVIMIENTO" />
@@ -113,9 +113,9 @@
           <Property Name="ID_MOVIMIENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_CUENTA" Type="Int32" Nullable="false" />
           <Property Name="FECHA_MOVIMIENTO" Type="DateTime" Precision="3" />
-          <Property Name="TIPO_MOVIMIENTO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="TIPO_MOVIMIENTO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IMPORTE_MOVIMIENTO" Type="Decimal" Precision="12" Scale="2" />
-          <Property Name="DESTINO_MOVIMIENTO" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="DESTINO_MOVIMIENTO" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="SALDO_MOVIMIENTO" Type="Decimal" Precision="12" Scale="2" />
           <NavigationProperty Name="CUENTA" Relationship="Self.FK_MOVIMIEN_CUEN_MOV_CUENTA" FromRole="MOVIMIENTO" ToRole="CUENTA" />
         </EntityType>
@@ -143,7 +143,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="corebancarioEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="corebancario" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
           <EntitySet Name="CUENTA" EntityType="Self.CUENTA" />
           <EntitySet Name="MOVIMIENTO" EntityType="Self.MOVIMIENTO" />
@@ -161,7 +161,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="corebancarioModelStoreContainer" CdmEntityContainer="corebancarioEntities">
+        <EntityContainerMapping StorageEntityContainer="corebancarioModelStoreContainer" CdmEntityContainer="corebancario">
           <EntitySetMapping Name="CLIENTE">
             <EntityTypeMapping TypeName="corebancarioModel.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
@@ -216,7 +216,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

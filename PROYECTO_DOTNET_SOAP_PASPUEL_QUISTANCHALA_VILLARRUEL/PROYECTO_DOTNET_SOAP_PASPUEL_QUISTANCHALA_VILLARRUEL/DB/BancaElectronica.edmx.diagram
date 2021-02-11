@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="752cfc7877cc46f8884d1211b746e0be" Name="Diagram1">
+      <Diagram DiagramId="fc029a61ca5d4acd9814993e81e523c4" Name="Diagram1">
         <EntityTypeShape EntityType="bancaelectronicaModel.USUARIO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>

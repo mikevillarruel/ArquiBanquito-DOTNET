@@ -13,7 +13,7 @@
           <Property Name="ID_CLIENTE" Type="int" />
           <Property Name="CEDULA_CLIENTE" Type="char" MaxLength="10" />
           <Property Name="NOMBRE_USUARIO" Type="varchar" MaxLength="32" />
-          <Property Name="PASSWORD_USUARIO" Type="varchar" MaxLength="32" />
+          <Property Name="PASSWORD_USUARIO" Type="varchar" MaxLength="128" />
           <Property Name="CAMBIO_USUARIO" Type="int" />
         </EntityType>
         <EntityContainer Name="bancaelectronicaModelStoreContainer">
@@ -32,10 +32,10 @@
           <Property Name="ID_CLIENTE" Type="Int32" />
           <Property Name="CEDULA_CLIENTE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
-          <Property Name="PASSWORD_USUARIO" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD_USUARIO" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <Property Name="CAMBIO_USUARIO" Type="Int32" />
         </EntityType>
-        <EntityContainer Name="bancaelectronicaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="bancaelectronica" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
         </EntityContainer>
       </Schema>
@@ -43,7 +43,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="bancaelectronicaModelStoreContainer" CdmEntityContainer="bancaelectronicaEntities">
+        <EntityContainerMapping StorageEntityContainer="bancaelectronicaModelStoreContainer" CdmEntityContainer="bancaelectronica">
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="bancaelectronicaModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
@@ -73,7 +73,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
