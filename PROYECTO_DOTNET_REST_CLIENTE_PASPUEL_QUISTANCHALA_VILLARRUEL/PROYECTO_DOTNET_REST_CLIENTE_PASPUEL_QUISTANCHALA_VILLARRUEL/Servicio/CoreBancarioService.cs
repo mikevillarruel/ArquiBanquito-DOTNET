@@ -20,7 +20,7 @@ namespace PROYECTO_DOTNET_REST_CLIENTE_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
 
         public async Task<Boolean> inicioSesion(String usuarioNombre, String contrasena)
         {
-            string url = localhost + "inicioSesion?usuarioNombre="+usuarioNombre+"&contrasena="+contrasena;
+            string url = localhost + "inicioSesion?usuarioNombre=" + usuarioNombre + "&contrasena=" + contrasena;
             string request = await new HttpClient().GetStringAsync(url);
             JObject obj = JsonConvert.DeserializeObject<JObject>(request);
             return (Boolean)obj.GetValue("resultado");
@@ -35,14 +35,14 @@ namespace PROYECTO_DOTNET_REST_CLIENTE_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
 
         public async Task<List<Movimiento>> detalleMovimientos(String cuenta)
         {
-            string url = localhost + "detalleMovimientos?cuenta="+cuenta;
+            string url = localhost + "detalleMovimientos?cuenta=" + cuenta;
             string request = await new HttpClient().GetStringAsync(url);
             return JsonConvert.DeserializeObject<List<Movimiento>>(request);
         }
 
         public async Task<Boolean> transferencias(String cuentaOrigen, Double importe, String cuentaDestino)
         {
-            string url = localhost + "transferencias?cuentaOrigen=" + cuentaOrigen + "&importe=" + importe + "&cuentaDestino=" + cuentaDestino;
+            string url = localhost + "transferencias?cuentaOrigen=" + cuentaOrigen + "&importe=" + (importe + "").Replace(",", ".") + "&cuentaDestino=" + cuentaDestino;
             string request = await new HttpClient().GetStringAsync(url);
             JObject obj = (JObject)JsonConvert.DeserializeObject(request);
             return (Boolean)obj.GetValue("resultado");
@@ -50,7 +50,7 @@ namespace PROYECTO_DOTNET_REST_CLIENTE_PASPUEL_QUISTANCHALA_VILLARRUEL.Servicio
 
         public async Task<Boolean> registrarCuentaBancaria(int idCliente, String tipoCuenta, double saldoInicial)
         {
-            string url = localhost + "registrarCuentaBancaria?idCliente=" + idCliente + "&tipoCuenta=" + tipoCuenta + "&saldoInicial=" + saldoInicial;
+            string url = localhost + "registrarCuentaBancaria?idCliente=" + idCliente + "&tipoCuenta=" + tipoCuenta + "&saldoInicial=" + (saldoInicial + "").Replace(",", ".");
             string request = await new HttpClient().GetStringAsync(url);
             JObject obj = (JObject)JsonConvert.DeserializeObject(request);
             return (Boolean)obj.GetValue("resultado");

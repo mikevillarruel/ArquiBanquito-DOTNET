@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'D:\GitHub\PROYECTO_DOTNET_REST_PASPUEL_QUISTANCHALA_VILLARRUEL\PROYECTO_DOTNET_REST_PASPUEL_QUISTANCHALA_VILLARRUEL\DB\BancaEletronica.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'D:\GitHub\ArquiBanquito-DOTNET\PROYECTO_DOTNET_REST_PASPUEL_QUISTANCHALA_VILLARRUEL\PROYECTO_DOTNET_REST_PASPUEL_QUISTANCHALA_VILLARRUEL\DB\BancaElectronica.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

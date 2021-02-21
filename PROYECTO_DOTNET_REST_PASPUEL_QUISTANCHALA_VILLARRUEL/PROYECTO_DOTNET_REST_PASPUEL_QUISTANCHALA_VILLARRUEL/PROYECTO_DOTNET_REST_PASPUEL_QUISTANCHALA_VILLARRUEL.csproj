@@ -174,10 +174,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BancaEletronica.tt</DependentUpon>
     </Compile>
-    <Compile Include="DB\BancaEletronica.Designer.cs">
+    <Compile Include="DB\BancaElectronica.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BancaEletronica.edmx</DependentUpon>
+      <DependentUpon>BancaElectronica.edmx</DependentUpon>
     </Compile>
     <Compile Include="DB\CLIENTE.cs">
       <DependentUpon>CoreBancario.tt</DependentUpon>
@@ -224,12 +224,12 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="DB\BancaEletronica.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BancaEletronica.edmx</DependentUpon>
+      <DependentUpon>BancaElectronica.edmx</DependentUpon>
       <LastGenOutput>BancaEletronica.Context.cs</LastGenOutput>
     </Content>
     <Content Include="DB\BancaEletronica.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BancaEletronica.edmx</DependentUpon>
+      <DependentUpon>BancaElectronica.edmx</DependentUpon>
       <LastGenOutput>BancaEletronica.cs</LastGenOutput>
     </Content>
     <Content Include="DB\CoreBancario.Context.tt">
@@ -273,12 +273,12 @@
     <Content Include="DB\CoreBancario.edmx.diagram">
       <DependentUpon>CoreBancario.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="DB\BancaEletronica.edmx">
+    <EntityDeploy Include="DB\BancaElectronica.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BancaEletronica.Designer.cs</LastGenOutput>
+      <LastGenOutput>BancaElectronica.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="DB\BancaEletronica.edmx.diagram">
-      <DependentUpon>BancaEletronica.edmx</DependentUpon>
+    <Content Include="DB\BancaElectronica.edmx.diagram">
+      <DependentUpon>BancaElectronica.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
